@@ -2,7 +2,9 @@ namespace QuestEngine.Models
 {
     public class PromptModel
     {
-        public int PromptId { get; set; }
+        public int Id { get; set; }
+
+        public string Caption { get; set; }
 
         public string Text { get; set; }
 

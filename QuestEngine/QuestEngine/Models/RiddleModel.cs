@@ -14,8 +14,9 @@ namespace QuestEngine.Models
             Prompts = new List<PromptModel>();
         }
 
-        public int RiddleId { get; set; }
+        public int Id { get; set; }
 
+        public string Caption { get; set; }
 
         public string Text { get; set; }
 

@@ -9,7 +9,7 @@ namespace QuestEngine.Models
             Riddles = new List<RiddleModel>();
         }
 
-        public int QuestId { get; set; }
+        public int Id { get; set; }
 
         public int Number { get; set; }
 
