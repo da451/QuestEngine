@@ -12,11 +12,11 @@ namespace QuestEngine.Models
 
         public int RiddleId { get; set; }
 
+        public virtual RiddleModel Riddle { get; set; }
+
         /// <summary>
         /// Time to prompt in min
         /// </summary>
         public int Time { get; set; }
-
-        public virtual RiddleModel Riddle { get; set; }
     }
 }

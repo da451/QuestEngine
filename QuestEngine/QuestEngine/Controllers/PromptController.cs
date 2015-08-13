@@ -17,8 +17,8 @@ namespace QuestEngine.Controllers
         // GET: Prompt
         public ActionResult Index()
         {
-            var promptModels = db.PromptModels.Include(p => p.Riddle);
-            return View(promptModels.ToList());
+            var prompts = db.Prompts.Include(p => p.Riddle);
+            return View(prompts.ToList());
         }
 
         // GET: Prompt/Details/5
@@ -28,7 +28,7 @@ namespace QuestEngine.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PromptModel promptModel = db.PromptModels.Find(id);
+            PromptModel promptModel = db.Prompts.Find(id);
             if (promptModel == null)
             {
                 return HttpNotFound();
@@ -39,7 +39,7 @@ namespace QuestEngine.Controllers
         // GET: Prompt/Create
         public ActionResult Create()
         {
-            ViewBag.RiddleId = new SelectList(db.RiddleModels, "Id", "Caption");
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption");
             return View();
         }
 
@@ -52,12 +52,12 @@ namespace QuestEngine.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.PromptModels.Add(promptModel);
+                db.Prompts.Add(promptModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RiddleId = new SelectList(db.RiddleModels, "Id", "Caption", promptModel.RiddleId);
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", promptModel.RiddleId);
             return View(promptModel);
         }
 
@@ -68,12 +68,12 @@ namespace QuestEngine.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PromptModel promptModel = db.PromptModels.Find(id);
+            PromptModel promptModel = db.Prompts.Find(id);
             if (promptModel == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RiddleId = new SelectList(db.RiddleModels, "Id", "Caption", promptModel.RiddleId);
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", promptModel.RiddleId);
             return View(promptModel);
         }
 
@@ -90,7 +90,7 @@ namespace QuestEngine.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RiddleId = new SelectList(db.RiddleModels, "Id", "Caption", promptModel.RiddleId);
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", promptModel.RiddleId);
             return View(promptModel);
         }
 
@@ -101,7 +101,7 @@ namespace QuestEngine.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PromptModel promptModel = db.PromptModels.Find(id);
+            PromptModel promptModel = db.Prompts.Find(id);
             if (promptModel == null)
             {
                 return HttpNotFound();
@@ -114,8 +114,8 @@ namespace QuestEngine.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PromptModel promptModel = db.PromptModels.Find(id);
-            db.PromptModels.Remove(promptModel);
+            PromptModel promptModel = db.Prompts.Find(id);
+            db.Prompts.Remove(promptModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace QuestEngine.Models
 {
@@ -19,11 +15,15 @@ namespace QuestEngine.Models
         {
         }
 
-        public System.Data.Entity.DbSet<QuestEngine.Models.QuestModel> QuestModels { get; set; }
+        public DbSet<QuestModel> Quests { get; set; }
 
-        public System.Data.Entity.DbSet<QuestEngine.Models.RiddleModel> RiddleModels { get; set; }
+        public DbSet<PromptModel> Prompts { get; set; }
 
-        public System.Data.Entity.DbSet<QuestEngine.Models.PromptModel> PromptModels { get; set; }
+        public DbSet<RiddleModel> Riddles { get; set; }
+
+        public DbSet<TeamModel> Teams { get; set; }
+
+        public DbSet<TeamQuestModel> TeamQuests { get; set; }
     
     }
 }

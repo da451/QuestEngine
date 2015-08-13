@@ -17,7 +17,7 @@ namespace QuestEngine.Controllers
         // GET: Riddle
         public ActionResult Index()
         {
-            return View(db.RiddleModels.ToList());
+            return View(db.Riddles.ToList());
         }
 
         // GET: Riddle/Details/5
@@ -27,7 +27,7 @@ namespace QuestEngine.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RiddleModel riddleModel = db.RiddleModels.Find(id);
+            RiddleModel riddleModel = db.Riddles.Find(id);
             if (riddleModel == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace QuestEngine.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.RiddleModels.Add(riddleModel);
+                db.Riddles.Add(riddleModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace QuestEngine.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RiddleModel riddleModel = db.RiddleModels.Find(id);
+            RiddleModel riddleModel = db.Riddles.Find(id);
             if (riddleModel == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace QuestEngine.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RiddleModel riddleModel = db.RiddleModels.Find(id);
+            RiddleModel riddleModel = db.Riddles.Find(id);
             if (riddleModel == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace QuestEngine.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RiddleModel riddleModel = db.RiddleModels.Find(id);
-            db.RiddleModels.Remove(riddleModel);
+            RiddleModel riddleModel = db.Riddles.Find(id);
+            db.Riddles.Remove(riddleModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

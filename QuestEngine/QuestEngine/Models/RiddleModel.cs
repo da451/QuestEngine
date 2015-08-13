@@ -22,9 +22,9 @@ namespace QuestEngine.Models
 
         public string Code { get; set; }
 
-        public virtual ICollection<PromptModel> Prompts { get; set; }
+        public virtual List<PromptModel> Prompts { get; set; }
 
-        public virtual ICollection<QuestModel> Quests { get; set; }
+        public virtual List<QuestModel> Quests { get; set; }
 
     }
 }

@@ -10,107 +10,116 @@ using QuestEngine.Models;
 
 namespace QuestEngine.Controllers
 {
-    public class QuestController : Controller
+    public class TeamQuestController : Controller
     {
         private QuestEngineContext db = new QuestEngineContext();
 
-        // GET: Quest
+        // GET: TeamQuest
         public ActionResult Index()
         {
-            return View(db.Quests.ToList());
+            var teamQuests = db.TeamQuests.Include(t => t.Riddle).Include(t => t.Team);
+            return View(teamQuests.ToList());
         }
 
-        // GET: Quest/Details/5
+        // GET: TeamQuest/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestModel questModel = db.Quests.Find(id);
-            if (questModel == null)
+            TeamQuestModel teamQuestModel = db.TeamQuests.Find(id);
+            if (teamQuestModel == null)
             {
                 return HttpNotFound();
             }
-            return View(questModel);
+            return View(teamQuestModel);
         }
 
-        // GET: Quest/Create
+        // GET: TeamQuest/Create
         public ActionResult Create()
         {
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption");
+            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name");
             return View();
         }
 
-        // POST: Quest/Create
+        // POST: TeamQuest/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Number,Tag")] QuestModel questModel)
+        public ActionResult Create([Bind(Include = "Id,TeamId,RiddleId,RiddleStarTime")] TeamQuestModel teamQuestModel)
         {
             if (ModelState.IsValid)
             {
-                db.Quests.Add(questModel);
+                db.TeamQuests.Add(teamQuestModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(questModel);
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", teamQuestModel.RiddleId);
+            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name", teamQuestModel.Id);
+            return View(teamQuestModel);
         }
 
-        // GET: Quest/Edit/5
+        // GET: TeamQuest/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestModel questModel = db.Quests.Find(id);
-            if (questModel == null)
+            TeamQuestModel teamQuestModel = db.TeamQuests.Find(id);
+            if (teamQuestModel == null)
             {
                 return HttpNotFound();
             }
-            return View(questModel);
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", teamQuestModel.RiddleId);
+            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name", teamQuestModel.Id);
+            return View(teamQuestModel);
         }
 
-        // POST: Quest/Edit/5
+        // POST: TeamQuest/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Number,Tag")] QuestModel questModel)
+        public ActionResult Edit([Bind(Include = "Id,TeamId,RiddleId,RiddleStarTime")] TeamQuestModel teamQuestModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(questModel).State = EntityState.Modified;
+                db.Entry(teamQuestModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(questModel);
+            ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", teamQuestModel.RiddleId);
+            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name", teamQuestModel.Id);
+            return View(teamQuestModel);
         }
 
-        // GET: Quest/Delete/5
+        // GET: TeamQuest/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestModel questModel = db.Quests.Find(id);
-            if (questModel == null)
+            TeamQuestModel teamQuestModel = db.TeamQuests.Find(id);
+            if (teamQuestModel == null)
             {
                 return HttpNotFound();
             }
-            return View(questModel);
+            return View(teamQuestModel);
         }
 
-        // POST: Quest/Delete/5
+        // POST: TeamQuest/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuestModel questModel = db.Quests.Find(id);
-            db.Quests.Remove(questModel);
+            TeamQuestModel teamQuestModel = db.TeamQuests.Find(id);
+            db.TeamQuests.Remove(teamQuestModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

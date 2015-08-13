@@ -10,107 +10,112 @@ using QuestEngine.Models;
 
 namespace QuestEngine.Controllers
 {
-    public class QuestController : Controller
+    public class TeamController : Controller
     {
         private QuestEngineContext db = new QuestEngineContext();
 
-        // GET: Quest
+        // GET: Team
         public ActionResult Index()
         {
-            return View(db.Quests.ToList());
+            var teams = db.Teams.Include(t => t.TeamQuest);
+            return View(teams.ToList());
         }
 
-        // GET: Quest/Details/5
+        // GET: Team/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestModel questModel = db.Quests.Find(id);
-            if (questModel == null)
+            TeamModel teamModel = db.Teams.Find(id);
+            if (teamModel == null)
             {
                 return HttpNotFound();
             }
-            return View(questModel);
+            return View(teamModel);
         }
 
-        // GET: Quest/Create
+        // GET: Team/Create
         public ActionResult Create()
         {
+            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id");
             return View();
         }
 
-        // POST: Quest/Create
+        // POST: Team/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Number,Tag")] QuestModel questModel)
+        public ActionResult Create([Bind(Include = "TeamQuestId,Id,Name")] TeamModel teamModel)
         {
             if (ModelState.IsValid)
             {
-                db.Quests.Add(questModel);
+                db.Teams.Add(teamModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(questModel);
+            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
+            return View(teamModel);
         }
 
-        // GET: Quest/Edit/5
+        // GET: Team/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestModel questModel = db.Quests.Find(id);
-            if (questModel == null)
+            TeamModel teamModel = db.Teams.Find(id);
+            if (teamModel == null)
             {
                 return HttpNotFound();
             }
-            return View(questModel);
+            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
+            return View(teamModel);
         }
 
-        // POST: Quest/Edit/5
+        // POST: Team/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Number,Tag")] QuestModel questModel)
+        public ActionResult Edit([Bind(Include = "TeamQuestId,Id,Name")] TeamModel teamModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(questModel).State = EntityState.Modified;
+                db.Entry(teamModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(questModel);
+            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
+            return View(teamModel);
         }
 
-        // GET: Quest/Delete/5
+        // GET: Team/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            QuestModel questModel = db.Quests.Find(id);
-            if (questModel == null)
+            TeamModel teamModel = db.Teams.Find(id);
+            if (teamModel == null)
             {
                 return HttpNotFound();
             }
-            return View(questModel);
+            return View(teamModel);
         }
 
-        // POST: Quest/Delete/5
+        // POST: Team/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            QuestModel questModel = db.Quests.Find(id);
-            db.Quests.Remove(questModel);
+            TeamModel teamModel = db.Teams.Find(id);
+            db.Teams.Remove(teamModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
