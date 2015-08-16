@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace QuestEngine.Models
 {
     public class PromptModel
     {
+        //[Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string Caption { get; set; }
@@ -10,7 +15,7 @@ namespace QuestEngine.Models
 
         public int Number { get; set; }
 
-        public int RiddleId { get; set; }
+        public int? RiddleId { get; set; }
 
         public virtual RiddleModel Riddle { get; set; }
 

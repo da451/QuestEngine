@@ -17,7 +17,7 @@ namespace QuestEngine.Controllers
         // GET: Team
         public ActionResult Index()
         {
-            var teams = db.Teams.Include(t => t.TeamQuest);
+            var teams = db.Teams;
             return View(teams.ToList());
         }
 
@@ -57,7 +57,7 @@ namespace QuestEngine.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
+            //ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
             return View(teamModel);
         }
 
@@ -73,7 +73,7 @@ namespace QuestEngine.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
+            //ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
             return View(teamModel);
         }
 
@@ -90,7 +90,7 @@ namespace QuestEngine.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
+            //ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
             return View(teamModel);
         }
 

@@ -10,6 +10,7 @@ using QuestEngine.Models;
 
 namespace QuestEngine.Controllers
 {
+    [Authorize]
     public class RiddleController : Controller
     {
         private QuestEngineContext db = new QuestEngineContext();
@@ -17,6 +18,7 @@ namespace QuestEngine.Controllers
         // GET: Riddle
         public ActionResult Index()
         {
+            var user = User.Identity;
             return View(db.Riddles.ToList());
         }
 
