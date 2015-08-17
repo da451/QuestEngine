@@ -241,11 +241,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Quest\Create.cshtml" />
-    <Content Include="Views\Quest\Delete.cshtml" />
-    <Content Include="Views\Quest\Details.cshtml" />
-    <Content Include="Views\Quest\Edit.cshtml" />
-    <Content Include="Views\Quest\Index.cshtml" />
     <Content Include="Views\Team\Create.cshtml" />
     <Content Include="Views\Team\Delete.cshtml" />
     <Content Include="Views\Team\Details.cshtml" />
@@ -256,16 +251,21 @@
     <Content Include="Views\TeamQuest\Details.cshtml" />
     <Content Include="Views\TeamQuest\Edit.cshtml" />
     <Content Include="Views\TeamQuest\Index.cshtml" />
-    <Content Include="Views\Prompt\Create.cshtml" />
-    <Content Include="Views\Prompt\Delete.cshtml" />
-    <Content Include="Views\Prompt\Details.cshtml" />
-    <Content Include="Views\Prompt\Edit.cshtml" />
-    <Content Include="Views\Prompt\Index.cshtml" />
+    <Content Include="Views\Quest\Create.cshtml" />
+    <Content Include="Views\Quest\Delete.cshtml" />
+    <Content Include="Views\Quest\Details.cshtml" />
+    <Content Include="Views\Quest\Edit.cshtml" />
+    <Content Include="Views\Quest\Index.cshtml" />
     <Content Include="Views\Riddle\Create.cshtml" />
     <Content Include="Views\Riddle\Delete.cshtml" />
     <Content Include="Views\Riddle\Details.cshtml" />
     <Content Include="Views\Riddle\Edit.cshtml" />
     <Content Include="Views\Riddle\Index.cshtml" />
+    <Content Include="Views\Prompt\Create.cshtml" />
+    <Content Include="Views\Prompt\Delete.cshtml" />
+    <Content Include="Views\Prompt\Details.cshtml" />
+    <Content Include="Views\Prompt\Edit.cshtml" />
+    <Content Include="Views\Prompt\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

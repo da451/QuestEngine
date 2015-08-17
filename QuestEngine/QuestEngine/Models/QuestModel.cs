@@ -11,10 +11,8 @@ namespace QuestEngine.Models
 
         public int Id { get; set; }
 
-        public int Number { get; set; }
-
         public string Tag { get; set; }
 
-        public virtual ICollection<RiddleModel> Riddles { get; set; }
+        public virtual List<RiddleModel> Riddles { get; set; }
     }
 }

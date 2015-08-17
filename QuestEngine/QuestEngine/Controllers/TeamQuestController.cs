@@ -17,7 +17,7 @@ namespace QuestEngine.Controllers
         // GET: TeamQuest
         public ActionResult Index()
         {
-            var teamQuests = db.TeamQuests.Include(t => t.Riddle).Include(t => t.Team);
+            var teamQuests = db.TeamQuests.Include(t => t.Quest).Include(t => t.Riddle).Include(t => t.Team);
             return View(teamQuests.ToList());
         }
 
@@ -39,8 +39,9 @@ namespace QuestEngine.Controllers
         // GET: TeamQuest/Create
         public ActionResult Create()
         {
+            ViewBag.QuestId = new SelectList(db.Quests, "Id", "Tag");
             ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption");
-            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name");
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace QuestEngine.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TeamId,RiddleId,RiddleStarTime")] TeamQuestModel teamQuestModel)
+        public ActionResult Create([Bind(Include = "Id,TeamId,RiddleId,RiddleStarTime,QuestId")] TeamQuestModel teamQuestModel)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +59,9 @@ namespace QuestEngine.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.QuestId = new SelectList(db.Quests, "Id", "Tag", teamQuestModel.QuestId);
             ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", teamQuestModel.RiddleId);
-            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name", teamQuestModel.Id);
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", teamQuestModel.TeamId);
             return View(teamQuestModel);
         }
 
@@ -75,8 +77,9 @@ namespace QuestEngine.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.QuestId = new SelectList(db.Quests, "Id", "Tag", teamQuestModel.QuestId);
             ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", teamQuestModel.RiddleId);
-            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name", teamQuestModel.Id);
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", teamQuestModel.TeamId);
             return View(teamQuestModel);
         }
 
@@ -85,7 +88,7 @@ namespace QuestEngine.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TeamId,RiddleId,RiddleStarTime")] TeamQuestModel teamQuestModel)
+        public ActionResult Edit([Bind(Include = "Id,TeamId,RiddleId,RiddleStarTime,QuestId")] TeamQuestModel teamQuestModel)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +96,9 @@ namespace QuestEngine.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.QuestId = new SelectList(db.Quests, "Id", "Tag", teamQuestModel.QuestId);
             ViewBag.RiddleId = new SelectList(db.Riddles, "Id", "Caption", teamQuestModel.RiddleId);
-            ViewBag.Id = new SelectList(db.Teams, "TeamQuestId", "Name", teamQuestModel.Id);
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", teamQuestModel.TeamId);
             return View(teamQuestModel);
         }
 

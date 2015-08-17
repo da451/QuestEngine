@@ -10,17 +10,10 @@ namespace QuestEngine.Models
 {
     public class TeamModel
     {
-        //[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Email { get; set; }
-
-        //[Key, ForeignKey("TeamQuest")]
-        //public int TeamQuestId { get; set; }
-
-        //public virtual TeamQuestModel TeamQuest { get; set; }
     }
 }

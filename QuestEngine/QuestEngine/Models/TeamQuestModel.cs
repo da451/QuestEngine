@@ -13,13 +13,17 @@ namespace QuestEngine.Models
         public int Id { get; set; }
 
          [ForeignKey("Team")]
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
 
         public virtual TeamModel Team { get; set;}
 
-        public int RiddleId { get; set; }
+        public int? RiddleId { get; set; }
         public virtual RiddleModel Riddle { get; set; }
 
-        public DateTime RiddleStarTime { get; set; }
+        public DateTime? RiddleStarTime { get; set; }
+
+        public int QuestId { get; set; }
+        public virtual QuestModel Quest { get; set; }
+
     }
 }

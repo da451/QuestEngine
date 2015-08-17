@@ -12,6 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Quest.Tag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quest.Tag)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Riddle.Caption)
         </dt>
 
@@ -25,14 +33,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Team.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamId)
         </dd>
 
         <dt>

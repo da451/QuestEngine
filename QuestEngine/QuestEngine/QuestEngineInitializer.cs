@@ -188,6 +188,53 @@ namespace QuestEngine
 
             riddles.ForEach(x=> context.Riddles.AddOrUpdate(x));
             context.SaveChanges();
+
+            var redQuest= new QuestModel()
+            {
+                Riddles = new List<RiddleModel>()
+                {
+                     riddle1, riddle3, riddle4
+                }
+            };
+
+            var greenQuest = new QuestModel()
+            {
+                Riddles = new List<RiddleModel>()
+                {
+                     riddle2, riddle3, riddle4
+                }
+            };
+
+            var quests = new List<QuestModel>() { redQuest, greenQuest};
+
+            quests.ForEach(x=> context.Quests.AddOrUpdate(x));
+            context.SaveChanges();
+
+
+            var redTeamQuest = new TeamQuestModel()
+            {
+                Team = redTeam,
+                TeamId = redTeam.Id,
+                QuestId = redQuest.Id,
+                Quest = redQuest
+            };
+
+            var greenTeamQuest = new TeamQuestModel()
+            {
+                Team = greenTeam,
+                TeamId = greenTeam.Id,
+                QuestId = greenQuest.Id,
+                Quest = greenQuest
+            };
+
+            var teamQuests = new  List<TeamQuestModel>()
+            {
+                redTeamQuest,greenTeamQuest
+            };
+
+            teamQuests.ForEach(x=> context.TeamQuests.AddOrUpdate(x));
+            context.SaveChanges();
+
             base.Seed(context);
         }
     }

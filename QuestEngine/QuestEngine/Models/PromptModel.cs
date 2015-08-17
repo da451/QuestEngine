@@ -5,8 +5,6 @@ namespace QuestEngine.Models
 {
     public class PromptModel
     {
-        //[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string Caption { get; set; }

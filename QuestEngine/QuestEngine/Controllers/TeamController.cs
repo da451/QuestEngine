@@ -17,8 +17,7 @@ namespace QuestEngine.Controllers
         // GET: Team
         public ActionResult Index()
         {
-            var teams = db.Teams;
-            return View(teams.ToList());
+            return View(db.Teams.ToList());
         }
 
         // GET: Team/Details/5
@@ -39,7 +38,6 @@ namespace QuestEngine.Controllers
         // GET: Team/Create
         public ActionResult Create()
         {
-            ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id");
             return View();
         }
 
@@ -48,7 +46,7 @@ namespace QuestEngine.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeamQuestId,Id,Name")] TeamModel teamModel)
+        public ActionResult Create([Bind(Include = "Id,Name,Email")] TeamModel teamModel)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +55,6 @@ namespace QuestEngine.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
             return View(teamModel);
         }
 
@@ -73,7 +70,6 @@ namespace QuestEngine.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
             return View(teamModel);
         }
 
@@ -82,7 +78,7 @@ namespace QuestEngine.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TeamQuestId,Id,Name")] TeamModel teamModel)
+        public ActionResult Edit([Bind(Include = "Id,Name,Email")] TeamModel teamModel)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace QuestEngine.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.TeamQuestId = new SelectList(db.TeamQuests, "Id", "Id", teamModel.TeamQuestId);
             return View(teamModel);
         }
 
