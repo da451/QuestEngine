@@ -10,7 +10,8 @@ using WebGrease.Css.Extensions;
 
 namespace QuestEngine
 {
-    public class QuestEngineInitializer : DropCreateDatabaseAlways<QuestEngineContext>
+    //public class QuestEngineInitializer : DropCreateDatabaseAlways<QuestEngineContext>
+    public class QuestEngineInitializer : DropCreateDatabaseIfModelChanges<QuestEngineContext>
     {
         protected override void Seed(QuestEngineContext context)
         {

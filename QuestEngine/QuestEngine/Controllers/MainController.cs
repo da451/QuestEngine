@@ -54,13 +54,13 @@ namespace QuestEngine.Controllers
                 }
                 
             }
-                
 
 
 
 
-            
-            return View();
+
+
+            return View(currentTeamRiddle);
         }
 
         // GET: Main/Details/5

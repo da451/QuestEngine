@@ -1,0 +1,50 @@
+﻿@model QuestEngine.ViewModels.CurrentTeamRiddleViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>CurrentTeamRiddleViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiddleText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiddleText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiddleStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiddleStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NextPrompTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NextPrompTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

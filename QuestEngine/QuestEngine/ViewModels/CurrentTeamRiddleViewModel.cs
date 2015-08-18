@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace QuestEngine.ViewModels
 {
-    class CurrentTeamRiddleViewModel
+    public class CurrentTeamRiddleViewModel
     {
+        public CurrentTeamRiddleViewModel()
+        {
+            Prompts = new List<Tuple<string, DateTime>>();
+        }
+
+        public int Id { get; set; }
         public string TeamName { get; set; }
 
         public string RiddleText { get; set; }

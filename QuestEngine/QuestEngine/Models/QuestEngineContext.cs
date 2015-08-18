@@ -24,5 +24,7 @@ namespace QuestEngine.Models
         public DbSet<TeamModel> Teams { get; set; }
 
         public DbSet<TeamQuestModel> TeamQuests { get; set; }
+		
+		public DbSet<StateModel> State { get; set; }
     }
 }
