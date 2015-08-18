@@ -8,8 +8,14 @@ namespace QuestEngine.ViewModels
 {
     class CurrentTeamRiddleViewModel
     {
+        public string TeamName { get; set; }
 
-        //public Te NAME { get; set; }
+        public string RiddleText { get; set; }
 
+        public DateTime RiddleStartTime { get; set; }
+
+        public DateTime NextPrompTime { get; set; }
+
+        public List<Tuple<string,DateTime>> Prompts { get; set; }
     }
 }
