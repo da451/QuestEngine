@@ -167,6 +167,7 @@
     <Compile Include="Controllers\RiddleController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TeamQuestController.cs" />
+    <Compile Include="Extensions\TeamQuestModelExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,6 +184,7 @@
     <Compile Include="Models\TeamQuestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestEngineInitializer.cs" />
+    <Compile Include="Services\QuestService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CurrentTeamRiddleViewModel.cs" />
   </ItemGroup>

@@ -26,5 +26,7 @@ namespace QuestEngine.ViewModels
         public TimeSpan NextPrompTime { get; set; }
 
         public List<string> Prompts { get; set; }
+
+
     }
 }
