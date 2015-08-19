@@ -10,18 +10,21 @@ namespace QuestEngine.ViewModels
     {
         public CurrentTeamRiddleViewModel()
         {
-            Prompts = new List<Tuple<string, DateTime>>();
+            Prompts = new List<string>();
         }
 
         public int Id { get; set; }
+
         public string TeamName { get; set; }
+
+        public int RiddleNumber { get; set; }
 
         public string RiddleText { get; set; }
 
         public DateTime RiddleStartTime { get; set; }
 
-        public DateTime NextPrompTime { get; set; }
+        public TimeSpan NextPrompTime { get; set; }
 
-        public List<Tuple<string,DateTime>> Prompts { get; set; }
+        public List<string> Prompts { get; set; }
     }
 }

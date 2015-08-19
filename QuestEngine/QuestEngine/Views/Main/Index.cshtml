@@ -4,11 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
 <div>
-    <h4>CurrentTeamRiddleViewModel</h4>
-    <hr />
+    <h4>
+        Загадка №
+        @Html.DisplayFor(model => model.RiddleNumber)
+    </h4>
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.TeamName)
@@ -41,10 +43,25 @@
         <dd>
             @Html.DisplayFor(model => model.NextPrompTime)
         </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<h4>
+    Подсказки
+</h4>
+<hr />
+<ol>
+    @foreach (var item in Model.Prompts)
+    {
+
+        <li>
+            @Html.DisplayFor(modelItem => item)
+        </li>
+    <hr/>
+    }
+</ol>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

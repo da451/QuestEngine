@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,13 +36,23 @@ namespace QuestEngine.Controllers
                 currentRiddle = teamQuest.Quest.Riddles.First();
 
                 teamQuest.RiddleStarTime = DateTime.Now;
+                teamQuest.RiddleId = currentRiddle.Id;
+
+
+                dbQuest.Entry(teamQuest).State = EntityState.Modified;
+                dbQuest.SaveChanges();
             }
 
             var currentTeamRiddle = new CurrentTeamRiddleViewModel();
 
             currentTeamRiddle.TeamName = team.Name;
-
+            
             currentTeamRiddle.RiddleText = currentRiddle.Text;
+
+            var r = teamQuest.Quest.Riddles.Single(x => x.Id == currentRiddle.Id);
+
+            currentTeamRiddle.RiddleNumber = teamQuest.Quest.Riddles.IndexOf(r) + 1;
+
 
             if (teamQuest.RiddleStarTime.HasValue)
             {
@@ -49,16 +60,17 @@ namespace QuestEngine.Controllers
 
                 foreach (var prompt in currentRiddle.Prompts)
                 {
-                    currentTeamRiddle.Prompts.Add(new Tuple<string, DateTime>(prompt.Text,
-                        currentTeamRiddle.RiddleStartTime.AddMinutes(prompt.Time)));
+                    if (teamQuest.RiddleStarTime.Value.AddMinutes(prompt.Time) < DateTime.Now)
+                    {
+                        currentTeamRiddle.Prompts.Add(prompt.Text);
+                    }
+                    else
+                    {
+                        currentTeamRiddle.NextPrompTime = (teamQuest.RiddleStarTime.Value.AddMinutes(prompt.Time) - DateTime.Now);
+                        break;
+                    }
                 }
-                
             }
-
-
-
-
-
 
             return View(currentTeamRiddle);
         }
