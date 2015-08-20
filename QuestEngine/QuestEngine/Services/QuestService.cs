@@ -23,6 +23,8 @@ namespace QuestEngine.Services
 
             var currentTeamRiddle = new CurrentTeamRiddleViewModel();
 
+            currentTeamRiddle.Id = currentRiddle.Id;
+
             currentTeamRiddle.TeamName = teamQuest.Team.Name;
 
             currentTeamRiddle.RiddleText = currentRiddle.Text;

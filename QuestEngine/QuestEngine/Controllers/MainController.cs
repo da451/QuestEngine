@@ -63,11 +63,12 @@ namespace QuestEngine.Controllers
 
         // POST: Main/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Tag")] QuestModel questModel)
+        public ActionResult Index([Bind(Include = "Id,Code")] CurrentTeamRiddleViewModel model)
         {
             try
             {
-                // TODO: Add update logic here
 
                 return RedirectToAction("Index");
             }

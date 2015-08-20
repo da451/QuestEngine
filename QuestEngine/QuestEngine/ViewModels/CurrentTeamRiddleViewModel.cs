@@ -27,6 +27,6 @@ namespace QuestEngine.ViewModels
 
         public List<string> Prompts { get; set; }
 
-
+        public string Code { get; set; }
     }
 }
