@@ -65,14 +65,18 @@ namespace QuestEngine.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "Id,Tag")] QuestModel questModel)
-        public ActionResult Index([Bind(Include = "Id,Code")] CurrentTeamRiddleViewModel model)
+        public ActionResult Index([Bind(Include = "Id,Code,TeamEmail")] CurrentTeamRiddleViewModel model)
         {
             try
             {
-
+                var nextRiddle = questService.IsRiddleCodeCorrect(model);
+                if (nextRiddle)
+                {
+                    
+                }
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }

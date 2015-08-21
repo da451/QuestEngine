@@ -9,10 +9,21 @@ namespace QuestEngine.Extensions
 {
     public static class TeamQuestModelExtension
     {
-        public  static int GetCurrentRiddleIndex(this TeamQuestModel teamQuest)
+        public  static int GetCurrentRiddleNumber(this TeamQuestModel teamQuest)
         {
             return teamQuest.Quest.Riddles.FindIndex(x => x.Id == teamQuest.Riddle.Id) +1;
         }
+
+        public static int GetCurrentRiddleIndex(this TeamQuestModel teamQuest)
+        {
+            return teamQuest.Quest.Riddles.FindIndex(x => x.Id == teamQuest.Riddle.Id);
+        }
+
+        public static RiddleModel NextRiddle(this TeamQuestModel teamQuest)
+        {
+            return new RiddleModel();
+        }
+
 
         public static List<string> GetCurrentPromptList(this TeamQuestModel teamQuest, out TimeSpan nextPrompTime)
         {

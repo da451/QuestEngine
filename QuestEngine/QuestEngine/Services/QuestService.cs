@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using QuestEngine.Extensions;
@@ -15,6 +16,8 @@ namespace QuestEngine.Services
 
         private QuestEngineContext dbQuest = new QuestEngineContext();
 
+         private static object _lock = new object();
+
         public CurrentTeamRiddleViewModel BuildRiddleForTeam(string teamEmail)
         {
             var teamQuest = getTeamQuest(teamEmail);
@@ -25,11 +28,13 @@ namespace QuestEngine.Services
 
             currentTeamRiddle.Id = currentRiddle.Id;
 
+            currentTeamRiddle.TeamEmail = teamQuest.Team.Email;
+
             currentTeamRiddle.TeamName = teamQuest.Team.Name;
 
             currentTeamRiddle.RiddleText = currentRiddle.Text;
 
-            currentTeamRiddle.RiddleNumber = teamQuest.GetCurrentRiddleIndex();
+            currentTeamRiddle.RiddleNumber = teamQuest.GetCurrentRiddleNumber();
 
             TimeSpan nextPromptTime;
 
@@ -68,6 +73,40 @@ namespace QuestEngine.Services
             }
 
             return currentRiddle;
+        }
+
+        public bool IsRiddleCodeCorrect(CurrentTeamRiddleViewModel model)
+        {
+            var teamQuest = getTeamQuest(model.TeamEmail);
+            var isCodeCorrect = teamQuest.Riddle.Code == model.Code;
+            var isRiddleSame = teamQuest.Riddle.Id == model.Id;
+
+            return isCodeCorrect && isRiddleSame;
+        }
+        
+        public bool IfRiddleCodeCorrectNextRiddle(CurrentTeamRiddleViewModel model)
+        {
+            lock (_lock)
+            {
+                if (IsRiddleCodeCorrect(model))
+                {
+                    nextRiddle(model);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        private void nextRiddle(CurrentTeamRiddleViewModel model)
+        {
+            var teamQuest = getTeamQuest(model.TeamEmail);
+
+            teamQuest.GetCurrentRiddleNumber();
+
+            
         }
     }
 }

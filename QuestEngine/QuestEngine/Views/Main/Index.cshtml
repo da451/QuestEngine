@@ -8,6 +8,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.TeamEmail)
     <div>
         <h4>
             Загадка №

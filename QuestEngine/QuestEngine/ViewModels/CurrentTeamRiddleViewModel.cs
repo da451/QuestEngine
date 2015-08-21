@@ -17,6 +17,8 @@ namespace QuestEngine.ViewModels
 
         public string TeamName { get; set; }
 
+        public string TeamEmail { get; set; }
+
         public int RiddleNumber { get; set; }
 
         public string RiddleText { get; set; }
