@@ -69,11 +69,8 @@ namespace QuestEngine.Controllers
         {
             try
             {
-                var nextRiddle = questService.IsRiddleCodeCorrect(model);
-                if (nextRiddle)
-                {
-                    
-                }
+                questService.IfRiddleCodeCorrectNextRiddle(model);
+
                 return RedirectToAction("Index");
             }
             catch(Exception ex)

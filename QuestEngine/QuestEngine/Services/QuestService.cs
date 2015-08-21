@@ -104,9 +104,14 @@ namespace QuestEngine.Services
         {
             var teamQuest = getTeamQuest(model.TeamEmail);
 
-            teamQuest.GetCurrentRiddleNumber();
-
-            
+            if (teamQuest.HasNextRiddle())
+            {
+                var nextRiddle = teamQuest.NextRiddle();
+                teamQuest.RiddleId = nextRiddle.Id;
+                teamQuest.RiddleStarTime=DateTime.Now;
+                dbQuest.Entry(teamQuest).State=EntityState.Modified;
+                dbQuest.SaveChanges();
+            }
         }
     }
 }

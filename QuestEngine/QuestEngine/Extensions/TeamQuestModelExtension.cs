@@ -18,10 +18,20 @@ namespace QuestEngine.Extensions
         {
             return teamQuest.Quest.Riddles.FindIndex(x => x.Id == teamQuest.Riddle.Id);
         }
-
+        public static bool HasNextRiddle(this TeamQuestModel teamQuest)
+        {
+            int current = teamQuest.GetCurrentRiddleIndex();
+            return teamQuest.Quest.Riddles.Count > current + 1;
+        }
         public static RiddleModel NextRiddle(this TeamQuestModel teamQuest)
         {
-            return new RiddleModel();
+            int current = teamQuest.GetCurrentRiddleIndex();
+            if (teamQuest.Quest.Riddles.Count > current + 1)
+            {
+                return teamQuest.Quest.Riddles[current + 1];
+            }
+
+            return null;
         }
 
 
