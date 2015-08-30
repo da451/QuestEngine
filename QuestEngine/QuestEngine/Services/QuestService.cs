@@ -14,7 +14,7 @@ namespace QuestEngine.Services
     public class QuestService
     {
 
-        private QuestEngineContext dbQuest = new QuestEngineContext();
+        private ApplicationDbContext dbQuest = new ApplicationDbContext();
 
          private static object _lock = new object();
 

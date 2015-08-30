@@ -12,7 +12,7 @@ namespace QuestEngine.Controllers
 {
     public class PromptController : Controller
     {
-        private QuestEngineContext db = new QuestEngineContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Prompt
         public ActionResult Index()

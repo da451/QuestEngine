@@ -29,5 +29,17 @@ namespace QuestEngine.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<QuestModel> Quests { get; set; }
+
+        public DbSet<PromptModel> Prompts { get; set; }
+
+        public DbSet<RiddleModel> Riddles { get; set; }
+
+        public DbSet<TeamModel> Teams { get; set; }
+
+        public DbSet<TeamQuestModel> TeamQuests { get; set; }
+
+        public DbSet<StateModel> State { get; set; }
     }
 }

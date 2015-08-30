@@ -12,7 +12,7 @@ namespace QuestEngine.Controllers
 {
     public class QuestController : Controller
     {
-        private QuestEngineContext db = new QuestEngineContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Quest
         public ActionResult Index()

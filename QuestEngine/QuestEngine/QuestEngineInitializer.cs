@@ -5,46 +5,47 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using QuestEngine.Models;
 using WebGrease.Css.Extensions;
 
 namespace QuestEngine
 {
-    //public class QuestEngineInitializer : DropCreateDatabaseAlways<QuestEngineContext>
-    public class QuestEngineInitializer : DropCreateDatabaseIfModelChanges<QuestEngineContext>
+    public class QuestEngineInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
-        protected override void Seed(QuestEngineContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
 
             var redTeam = new TeamModel()
             {
-                Email = "RedTeam@quest.com",
-                Name = "Red Team"
+                Email = "RedTeam@quest.ua",
+                Name = "RedTeam"
             };
 
             var greenTeam = new TeamModel()
             {
-                Email = "GreenTeam@quest.com",
-                Name = "Green Team"
+                Email = "GreenTeam@quest.ua",
+                Name = "GreenTeam"
             };
 
             var yellowTeam = new TeamModel()
             {
-                Email = "YellowTeam@quest.com",
-                Name = "Yellow Team"
+                Email = "YellowTeam@quest.ua",
+                Name = "YellowTeam"
             };
 
 
             var blueTeam = new TeamModel()
             {
-                Email = "BlueTeam@quest.com",
-                Name = "Blue Team"
+                Email = "BlueTeam@quest.ua",
+                Name = "BlueTeam"
             };
 
             var orangeTeam = new TeamModel()
             {
-                Email = "OrangeTeam@quest.com",
-                Name = "Orange Team"
+                Email = "OrangeTeam@quest.ua",
+                Name = "OrangeTeam"
             };
 
             List<TeamModel> teams = new List<TeamModel>()
@@ -53,6 +54,54 @@ namespace QuestEngine
             };
             teams.ForEach(x=>context.Teams.AddOrUpdate(x));
             context.SaveChanges();
+
+            //IdentityUser greenTeamUser = new IdentityUser
+            //{
+            //    Id = "bf551f37-36c5-4dfa-a190-6821c56a6db0",
+            //    Login = greenTeam.Login,
+            //    AccessFailedCount = 0,
+            //    EmailConfirmed = false,
+            //    PasswordHash = "ADcQU5aAtLkLIKlaRxSaUY4BiT0E3ezsRWgHD+JrGrorXSc64dm2yJthcjlj9RAi/Q==",
+            //    SecurityStamp = "28c58a88-5528-48bd-be69-1b037ab09470",
+            //    UserName = greenTeam.Name
+
+            //};
+
+            
+            //IdentityUser redTeamUser = new IdentityUser
+            //{
+            //    Id = "fee9d244-ad33-49c6-9307-67dee7d6d93f",
+            //    Login = redTeam.Login,
+            //    AccessFailedCount = 0,
+            //    EmailConfirmed = false,
+            //    PasswordHash = "ANfeI7cHbYbl3I8n6812EIBLrbOjjEPXNGEypnexigHBMy+bWffWmyCSxI0O5zDWfQ==",
+            //    SecurityStamp = "2a25e0f5-8257-453d-aa50-2eddd0633e02",
+            //    UserName = redTeam.Name
+
+            //};
+
+            //var teamUsers = new List<IdentityUser>() {redTeamUser, greenTeamUser};
+            //teamUsers.ForEach(x=> context.Users.AddOrUpdate(x));
+
+            context.Users.AddOrUpdate(i => i.Id,
+                new ApplicationUser
+                {
+                    Id = "1",
+                    UserName = redTeam.Name,
+                    Email = redTeam.Email,
+                    PasswordHash = new PasswordHasher().HashPassword("1"),
+                    SecurityStamp = String.Empty
+                },
+                new ApplicationUser
+                {
+                    Id = "2",
+                    UserName = greenTeam.Name,
+                    Email = greenTeam.Email,
+                    PasswordHash = new PasswordHasher().HashPassword("1"),
+                    SecurityStamp = String.Empty
+                });
+            context.SaveChanges();
+
             var prompt_1_1 = new PromptModel()
             {
                 Caption = "Prompt_1_1",

@@ -12,7 +12,7 @@ namespace QuestEngine.Controllers
 {
     public class RiddleController : Controller
     {
-        private QuestEngineContext db = new QuestEngineContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Riddle
         public ActionResult Index()

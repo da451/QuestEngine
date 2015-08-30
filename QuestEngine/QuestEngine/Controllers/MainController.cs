@@ -13,12 +13,11 @@ namespace QuestEngine.Controllers
     [Authorize]
     public class MainController : Controller
     {
-        
-        private QuestEngineContext dbQuest = new QuestEngineContext();
+
+        private ApplicationDbContext dbQuest = new ApplicationDbContext();
 
         private QuestService questService = new QuestService();
 
-        //private A db = new QuestEngineContext();
         // GET: Main
         public ActionResult Index()
         {
