@@ -1,0 +1,9 @@
+<publishData>
+  <publishProfile
+    publishUrl="https://dmitryzinoviev-001-site1.smarterasp.net:8172/msdeploy.axd"
+    msdeploySite="dmitryzinoviev-001-site1"
+    destinationAppUrl="http://dmitryzinoviev-001-site1.smarterasp.net/"
+    profileName="Default Settings"
+    publishMethod="MSDeploy"
+    userName="ifc\dmitryzinoviev-001" />
+</publishData>

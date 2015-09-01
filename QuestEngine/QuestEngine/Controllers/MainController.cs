@@ -64,7 +64,7 @@ namespace QuestEngine.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "Id,Tag")] QuestModel questModel)
-        public ActionResult Index([Bind(Include = "Id,Code,TeamEmail")] CurrentTeamRiddleViewModel model)
+        public ActionResult Index([Bind(Include = "Id,Code,TeamName")] CurrentTeamRiddleViewModel model)
         {
             try
             {
