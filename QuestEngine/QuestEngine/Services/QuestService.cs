@@ -18,9 +18,9 @@ namespace QuestEngine.Services
 
          private static object _lock = new object();
 
-        public CurrentTeamRiddleViewModel BuildRiddleForTeam(string teamEmail)
+        public CurrentTeamRiddleViewModel BuildRiddleForTeam(string teamName)
         {
-            var teamQuest = getTeamQuest(teamEmail);
+            var teamQuest = getTeamQuest(teamName);
 
             RiddleModel currentRiddle = getCurrentRiddle(teamQuest);
 
@@ -45,9 +45,9 @@ namespace QuestEngine.Services
             return currentTeamRiddle;
         }
 
-        private TeamQuestModel getTeamQuest(string email)
+        private TeamQuestModel getTeamQuest(string name)
         {
-           return dbQuest.TeamQuests.Single(x => x.Team.Email == email);
+           return dbQuest.TeamQuests.Single(x => x.Team.Name == name);
         }
         /// <summary>
         /// Get current team riddle, if where is no current riddle,  will set it

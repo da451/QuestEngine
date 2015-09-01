@@ -21,9 +21,9 @@ namespace QuestEngine.Controllers
         // GET: Main
         public ActionResult Index()
         {
-            var userEmail = User.Identity.Name;
+            var userName = User.Identity.Name;
             
-            return View(questService.BuildRiddleForTeam(userEmail));
+            return View(questService.BuildRiddleForTeam(userName));
         }
 
         // GET: Main/Details/5
