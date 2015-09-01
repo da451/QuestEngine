@@ -175,7 +175,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PromptModel.cs" />
-    <Compile Include="Models\QuestEngineContext.cs" />
     <Compile Include="Models\QuestModel.cs" />
     <Compile Include="Models\RiddleModel.cs" />
     <Compile Include="Models\RiddleViewModel.cs" />
