@@ -61,19 +61,22 @@
 
     </div>
 }
-<h4>
-    Подсказки
-</h4>
-<hr />
-<ol>
-    @foreach (var item in Model.Prompts)
-    {
-
-        <li>
-            @Html.DisplayFor(modelItem => item)
-        </li>
+@if (Model != null && Model.Prompts != null && Model.Prompts.Count != 0)
+{
+    <h4>
+        Подсказки
+    </h4>
     <hr/>
-    }
-</ol>
+    <ol>
+        @foreach (var item in Model.Prompts)
+        {
+
+            <li>
+                @Html.DisplayFor(modelItem => item)
+            </li>
+            <hr/>
+        }
+    </ol>
+}
 
 
