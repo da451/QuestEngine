@@ -21,26 +21,33 @@ namespace QuestEngine.Services
         public CurrentTeamRiddleViewModel BuildRiddleForTeam(string teamName)
         {
             var teamQuest = getTeamQuest(teamName);
-
-            RiddleModel currentRiddle = getCurrentRiddle(teamQuest);
-
             var currentTeamRiddle = new CurrentTeamRiddleViewModel();
+            if (isTheEnd(teamQuest))
+            {
+                currentTeamRiddle.TeamName = teamQuest.Team.Name;
 
-            currentTeamRiddle.Id = currentRiddle.Id;
+                currentTeamRiddle.IsTheEnd = true;
+            }
+            else
+            {
+                RiddleModel currentRiddle = getCurrentRiddle(teamQuest);
 
-            currentTeamRiddle.TeamEmail = teamQuest.Team.Email;
+                currentTeamRiddle.Id = currentRiddle.Id;
 
-            currentTeamRiddle.TeamName = teamQuest.Team.Name;
+                currentTeamRiddle.TeamEmail = teamQuest.Team.Email;
 
-            currentTeamRiddle.RiddleText = currentRiddle.Text;
+                currentTeamRiddle.TeamName = teamQuest.Team.Name;
 
-            currentTeamRiddle.RiddleNumber = teamQuest.GetCurrentRiddleNumber();
+                currentTeamRiddle.RiddleText = currentRiddle.Text;
 
-            TimeSpan nextPromptTime;
+                currentTeamRiddle.RiddleNumber = teamQuest.GetCurrentRiddleNumber();
 
-            currentTeamRiddle.Prompts = teamQuest.GetCurrentPromptList(out nextPromptTime);
+                TimeSpan nextPromptTime;
 
-            currentTeamRiddle.NextPrompTime = nextPromptTime;
+                currentTeamRiddle.Prompts = teamQuest.GetCurrentPromptList(out nextPromptTime);
+
+                currentTeamRiddle.NextPrompTime = nextPromptTime;
+            }
 
             return currentTeamRiddle;
         }
@@ -73,6 +80,16 @@ namespace QuestEngine.Services
             }
 
             return currentRiddle;
+        }
+
+        private bool isTheEnd(TeamQuestModel teamQuest)
+        {
+            if (teamQuest.Riddle != null)
+            {
+                 int curId = teamQuest.Riddle.Id;
+                return teamQuest.Quest.Riddles.Last().Id == curId;
+            }
+            return false;
         }
 
         public bool IsRiddleCodeCorrect(CurrentTeamRiddleViewModel model)

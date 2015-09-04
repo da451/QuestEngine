@@ -38,5 +38,8 @@ namespace QuestEngine.ViewModels
 
         [Display(Name = "Код")]
         public string Code { get; set; }
+
+        
+        public bool IsTheEnd { get; set; }
     }
 }
