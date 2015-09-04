@@ -11,7 +11,7 @@
     @Html.HiddenFor(model => model.TeamName)
     <div>
         <h4>
-            Загадка №
+            @Html.DisplayNameFor(model => model.RiddleNumber)
             @Html.DisplayFor(model => model.RiddleNumber)
         </h4>
         <hr/>
@@ -32,13 +32,13 @@
                 @Html.DisplayFor(model => model.RiddleText)
             </dd>
 
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.RiddleStartTime)
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.RiddleStartTime)
-            </dd>
+            </dd>*@
 
             <dt>
                 @Html.DisplayNameFor(model => model.NextPrompTime)
@@ -64,7 +64,7 @@
 @if (Model != null && Model.Prompts != null && Model.Prompts.Count != 0)
 {
     <h4>
-        Подсказки
+        @Html.LabelFor(model => model.Prompts)
     </h4>
     <hr/>
     <ol>
