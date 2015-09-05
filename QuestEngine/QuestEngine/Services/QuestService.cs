@@ -22,32 +22,24 @@ namespace QuestEngine.Services
         {
             var teamQuest = getTeamQuest(teamName);
             var currentTeamRiddle = new CurrentTeamRiddleViewModel();
-            if (isTheEnd(teamQuest))
-            {
-                currentTeamRiddle.TeamName = teamQuest.Team.Name;
 
-                currentTeamRiddle.IsTheEnd = true;
-            }
-            else
-            {
-                RiddleModel currentRiddle = getCurrentRiddle(teamQuest);
+            RiddleModel currentRiddle = getCurrentRiddle(teamQuest);
 
-                currentTeamRiddle.Id = currentRiddle.Id;
+            currentTeamRiddle.Id = currentRiddle.Id;
+            currentTeamRiddle.IsTheEnd = teamQuest.IsTheEnd;
+            currentTeamRiddle.TeamEmail = teamQuest.Team.Email;
 
-                currentTeamRiddle.TeamEmail = teamQuest.Team.Email;
+            currentTeamRiddle.TeamName = teamQuest.Team.Name;
 
-                currentTeamRiddle.TeamName = teamQuest.Team.Name;
+            currentTeamRiddle.RiddleText = currentRiddle.Text;
 
-                currentTeamRiddle.RiddleText = currentRiddle.Text;
+            currentTeamRiddle.RiddleNumber = teamQuest.GetCurrentRiddleNumber();
 
-                currentTeamRiddle.RiddleNumber = teamQuest.GetCurrentRiddleNumber();
+            TimeSpan nextPromptTime;
 
-                TimeSpan nextPromptTime;
+            currentTeamRiddle.Prompts = teamQuest.GetCurrentPromptList(out nextPromptTime);
 
-                currentTeamRiddle.Prompts = teamQuest.GetCurrentPromptList(out nextPromptTime);
-
-                currentTeamRiddle.NextPrompTime = nextPromptTime;
-            }
+            currentTeamRiddle.NextPrompTime = nextPromptTime;
 
             return currentTeamRiddle;
         }
@@ -77,19 +69,11 @@ namespace QuestEngine.Services
                 teamQuest.RiddleId = currentRiddle.Id;
                 dbQuest.Entry(teamQuest).State = EntityState.Modified;
                 dbQuest.SaveChanges();
+
+                new StatisticsService().Start(teamQuest.Team.Name, teamQuest.RiddleStarTime.Value);
             }
 
             return currentRiddle;
-        }
-
-        private bool isTheEnd(TeamQuestModel teamQuest)
-        {
-            if (teamQuest.Riddle != null)
-            {
-                 int curId = teamQuest.Riddle.Id;
-                return teamQuest.Quest.Riddles.Last().Id == curId;
-            }
-            return false;
         }
 
         public bool IsRiddleCodeCorrect(CurrentTeamRiddleViewModel model)
@@ -120,14 +104,22 @@ namespace QuestEngine.Services
         private void nextRiddle(CurrentTeamRiddleViewModel model)
         {
             var teamQuest = getTeamQuest(model.TeamName);
-
+            var statisticsService = new StatisticsService();
             if (teamQuest.HasNextRiddle())
             {
                 var nextRiddle = teamQuest.NextRiddle();
                 teamQuest.RiddleId = nextRiddle.Id;
-                teamQuest.RiddleStarTime=DateTime.Now;
-                dbQuest.Entry(teamQuest).State=EntityState.Modified;
+                teamQuest.RiddleStarTime = DateTime.Now;
+                dbQuest.Entry(teamQuest).State = EntityState.Modified;
                 dbQuest.SaveChanges();
+                statisticsService.UpdateStatictics(model.TeamName);
+            }
+            else
+            {
+                teamQuest.IsTheEnd = true;
+                dbQuest.Entry(teamQuest).State = EntityState.Modified;
+                dbQuest.SaveChanges();
+                statisticsService.Finish(model.TeamName);
             }
         }
     }

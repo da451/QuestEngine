@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuestEngine.Models
 {
-    public class StateModel
+    public class StatisticsModel
     {
         public int Id { get; set; }
 

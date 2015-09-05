@@ -4,19 +4,7 @@
     ViewBag.Title = "Квест";
 }
 
-@if (Model.IsTheEnd)
-{
-    <br/>
-    <br/>
-    <br />
-    <H3 align="center">
-        @Html.DisplayFor(model => model.TeamName),
-        Вы молодцы!!!
-    </H3>
-}
-else
-{
-    using (Html.BeginForm())
+    @using (Html.BeginForm())
     {
      @Html.AntiForgeryToken()
      @Html.HiddenFor(model => model.Id)
@@ -73,23 +61,23 @@ else
 
      </div>
  }
-if (Model != null && Model.Prompts != null && Model.Prompts.Count != 0)
+@if (Model != null && Model.Prompts != null && Model.Prompts.Count != 0)
  {
      <h4>
          @Html.LabelFor(model => model.Prompts)
      </h4>
      <hr/>
-     <ol>
-         @foreach (var item in Model.Prompts)
-         {
+<ol>
+    @foreach (var item in Model.Prompts)
+    {
 
-             <li>
-                 @Html.DisplayFor(modelItem => item)
-             </li>
-             <hr/>
-         }
-     </ol>
- }
+        <li>
+            @Html.DisplayFor(modelItem => item)
+        </li>
+        <hr/>
+    }
+</ol>
 }
+
 
 

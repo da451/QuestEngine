@@ -22,6 +22,8 @@ namespace QuestEngine.Models
 
         public DateTime? RiddleStarTime { get; set; }
 
+        public bool IsTheEnd { get; set; }
+
         public int QuestId { get; set; }
         public virtual QuestModel Quest { get; set; }
 

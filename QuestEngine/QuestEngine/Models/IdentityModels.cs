@@ -40,6 +40,6 @@ namespace QuestEngine.Models
 
         public DbSet<TeamQuestModel> TeamQuests { get; set; }
 
-        public DbSet<StateModel> State { get; set; }
+        public DbSet<StatisticsModel> Statistics { get; set; }
     }
 }

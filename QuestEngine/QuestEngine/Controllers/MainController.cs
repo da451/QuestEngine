@@ -21,13 +21,22 @@ namespace QuestEngine.Controllers
         // GET: Main
         public ActionResult Index()
         {
-            var userName = User.Identity.Name;
-            
-            return View(questService.BuildRiddleForTeam(userName));
+            var currentTeamRiddle = questService.BuildRiddleForTeam(User.Identity.Name);
+
+            if (currentTeamRiddle.IsTheEnd)
+                return RedirectToAction("TheEnd");
+
+            return View(currentTeamRiddle);
         }
 
         // GET: Main/Details/5
         public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+
+        public ActionResult TheEnd()
         {
             return View();
         }
