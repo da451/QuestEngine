@@ -79,7 +79,7 @@ namespace QuestEngine.Services
         public bool IsRiddleCodeCorrect(CurrentTeamRiddleViewModel model)
         {
             var teamQuest = getTeamQuest(model.TeamName);
-            var isCodeCorrect = teamQuest.Riddle.Code == model.Code;
+            var isCodeCorrect = teamQuest.Riddle.Code.ToLower() == model.Code.ToLower();
             var isRiddleSame = teamQuest.Riddle.Id == model.Id;
 
             return isCodeCorrect && isRiddleSame;

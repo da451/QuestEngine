@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QuestEngine.Extensions;
 using QuestEngine.Models;
+using QuestEngine.ViewModels;
 
 namespace QuestEngine.Services
 {
@@ -56,6 +57,33 @@ namespace QuestEngine.Services
         public void Finish(string teamName)
         {
             CreateStatistics(teamName, FinishCode, DateTime.Now);
+        }
+
+        public StatisticsViewModel GetStatistics()
+        {
+            var statistics  = context.Statistics;
+
+            var statisticsVM = new StatisticsViewModel();
+
+            foreach (var s in statistics)
+            {
+                var teamSatistics =  statisticsVM.TeamSatistics.SingleOrDefault(x => x.TeamName == s.TeamName);
+                if (teamSatistics == null)
+                {
+                    teamSatistics = new TeamSatisticsViewModel();
+                    teamSatistics.TeamName = s.TeamName;
+                    statisticsVM.TeamSatistics.Add(teamSatistics);
+                }
+
+                teamSatistics.Riddles.Add(new RiddlesViewModel()
+                {
+                    StatTime = s.StarTime,
+                    RiddleNumber = s.Riddle
+                });
+            }
+
+            return statisticsVM;
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using QuestEngine.Models;
+using QuestEngine.Services;
 
 namespace QuestEngine.Controllers
 {
@@ -17,7 +18,9 @@ namespace QuestEngine.Controllers
         // GET: Statistics
         public ActionResult Index()
         {
-            return View(db.Statistics.ToList());
+
+            var statistics = new StatisticsService().GetStatistics();
+            return View(statistics);
         }
 
         // GET: Statistics/Details/5

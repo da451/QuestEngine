@@ -188,6 +188,9 @@
     <Compile Include="Services\StatisticsService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CurrentTeamRiddleViewModel.cs" />
+    <Compile Include="ViewModels\RiddlesViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsViewModel.cs" />
+    <Compile Include="ViewModels\TeamSatisticsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -196,6 +199,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="QuestEngine.publish.xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
