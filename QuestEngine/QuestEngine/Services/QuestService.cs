@@ -21,6 +21,8 @@ namespace QuestEngine.Services
         public CurrentTeamRiddleViewModel BuildRiddleForTeam(string teamName)
         {
             var teamQuest = getTeamQuest(teamName);
+            if (teamQuest == null)
+                return null;
             var currentTeamRiddle = new CurrentTeamRiddleViewModel();
 
             RiddleModel currentRiddle = getCurrentRiddle(teamQuest);
@@ -46,7 +48,7 @@ namespace QuestEngine.Services
 
         private TeamQuestModel getTeamQuest(string name)
         {
-           return dbQuest.TeamQuests.Single(x => x.Team.Name == name);
+           return dbQuest.TeamQuests.SingleOrDefault(x => x.Team.Name == name);
         }
         /// <summary>
         /// Get current team riddle, if where is no current riddle,  will set it

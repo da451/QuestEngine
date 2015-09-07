@@ -23,7 +23,7 @@ namespace QuestEngine.Controllers
         {
             var currentTeamRiddle = questService.BuildRiddleForTeam(User.Identity.Name);
 
-            if (currentTeamRiddle.IsTheEnd)
+            if (currentTeamRiddle!=null && currentTeamRiddle.IsTheEnd)
                 return RedirectToAction("TheEnd");
 
             return View(currentTeamRiddle);
