@@ -77,7 +77,7 @@ namespace QuestEngine.Services
 
                 teamSatistics.Riddles.Add(new RiddlesViewModel()
                 {
-                    StatTime = s.StarTime,
+                    StatTime = s.StarTime.AddHours(10),
                     RiddleNumber = s.Riddle
                 });
             }
