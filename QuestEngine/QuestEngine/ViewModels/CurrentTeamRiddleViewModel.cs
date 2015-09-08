@@ -30,8 +30,8 @@ namespace QuestEngine.ViewModels
 
         public DateTime RiddleStartTime { get; set; }
 
-        [Display(Name = "След. подсказака")]
-        public TimeSpan NextPrompTime { get; set; }
+        [Display(Name = "След. подсказка")]
+        public string NextPrompTime { get; set; }
 
         [Display(Name = "Подсказки")]
         public List<string> Prompts { get; set; }

@@ -10,6 +10,7 @@ using QuestEngine.Models;
 
 namespace QuestEngine.Controllers
 {
+    [Authorize(Users = "Administrator")]
     public class TeamController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
