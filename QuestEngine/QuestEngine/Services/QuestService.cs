@@ -41,7 +41,7 @@ namespace QuestEngine.Services
 
             currentTeamRiddle.Prompts = teamQuest.GetCurrentPromptList(out nextPromptTime);
 
-            currentTeamRiddle.NextPrompTime = string.Format("{0:\\hh\\:mm\\:ss}", nextPromptTime);
+            currentTeamRiddle.NextPrompTime = string.Format("{0:hh\\:mm\\:ss}", nextPromptTime);
 
             return currentTeamRiddle;
         }

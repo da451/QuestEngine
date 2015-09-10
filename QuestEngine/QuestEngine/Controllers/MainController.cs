@@ -77,7 +77,8 @@ namespace QuestEngine.Controllers
         {
             try
             {
-                questService.IfRiddleCodeCorrectNextRiddle(model);
+                if(!string.IsNullOrEmpty(model.Code))
+                    questService.IfRiddleCodeCorrectNextRiddle(model);
 
                 return RedirectToAction("Index");
             }
